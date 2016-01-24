@@ -1,15 +1,26 @@
-package ru.project.DAO;
+package ru.project.service.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 import ru.project.model.Account;
 
-import java.sql.ResultSet;
+import javax.inject.Inject;
+import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.List;
 
+@Repository
 public class AccountDAO extends JdbcDaoSupport {
+    //@Inject
+    private JdbcTemplate jdbcTemplate;
+
+    @Inject
+    public AccountDAO(DataSource dataSource) {
+        setDataSource(dataSource);
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
 
     public int createAccount(Account account) throws SQLException {
         return getJdbcTemplate().update("INSERT INTO account (agent_id, balance) VALUES(?, ?)",

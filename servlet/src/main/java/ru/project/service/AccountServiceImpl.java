@@ -1,14 +1,17 @@
 package ru.project.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.project.DAO.AccountDAO;
+import ru.project.service.dao.AccountDAO;
 import ru.project.model.Account;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 
+@Service
 public class AccountServiceImpl implements AccountService {
-
+    @Inject
     private AccountDAO dao;
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = SQLException.class)

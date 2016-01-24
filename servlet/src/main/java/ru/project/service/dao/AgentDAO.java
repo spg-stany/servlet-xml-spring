@@ -1,18 +1,30 @@
-package ru.project.DAO;
+package ru.project.service.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 import ru.project.model.Agent;
 import ru.project.utils.HashGen;
 
+import javax.inject.Inject;
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+@Repository
 public class AgentDAO extends JdbcDaoSupport {
+    //@Inject
+    private JdbcTemplate jdbcTemplate;
+
+    @Inject
+    public AgentDAO(DataSource dataSource) {
+        setDataSource(dataSource);
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     public int createAgent(Agent agent) throws SQLException {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(getJdbcTemplate());

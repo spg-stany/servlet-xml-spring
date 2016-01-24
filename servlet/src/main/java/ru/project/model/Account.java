@@ -1,17 +1,8 @@
 package ru.project.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 
-@Entity
 public class Account {
-    @Id
-    //@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ")
-    //@SequenceGenerator(name="SEQ", sequenceName="SEQ", allocationSize=100)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int agentId;
     private BigDecimal balance;

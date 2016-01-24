@@ -1,13 +1,17 @@
 package ru.project.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.project.DAO.AgentDAO;
+import ru.project.service.dao.AgentDAO;
 import ru.project.model.Agent;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 
+@Service
 public class AgentServiceImpl implements AgentService {
+    @Inject
     private AgentDAO dao;
 
     @Override
