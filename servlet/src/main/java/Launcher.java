@@ -1,15 +1,25 @@
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import ru.project.controller.AppConfig;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
 public class Launcher {
+
+    private static ApplicationContext ctx;
+
+    @Inject
+    public Launcher(ApplicationContext ctx) {
+        this.ctx = ctx;
+    }
 
     public static void main(String[] args) throws Exception
     {
@@ -25,21 +35,17 @@ public class Launcher {
     }
 
     private static ServletContextHandler getServletHandler() throws IOException {
-        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(AppConfig.class);
-        //AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        contextHandler.setContextPath("/");
 
+        AnnotationConfigWebApplicationContext webCtx = new AnnotationConfigWebApplicationContext();
+        webCtx.register(AppConfig.class);
+        webCtx.setParent(ctx);
 
-        ServletHolder mvcServletHolder = new ServletHolder("mvcServlet", new DispatcherServlet(ctx));
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        //context.setClassLoader(Thread.currentThread().getContextClassLoader());
-        context.addServlet(mvcServletHolder, "/");
-        /*
-        context.setResourceBase(//new ClassPathResource("webapp").getURI().toString()
-                "file:/D:/dev/servlet-xml/servlet/src/main/webapp/"
-        );
-        */
-        return context;
+        contextHandler.addServlet(new ServletHolder("mvcServlet", new DispatcherServlet(webCtx)), "/*");
+        contextHandler.addEventListener(new ContextLoaderListener(webCtx));
+
+        return contextHandler;
     }
 
 }
