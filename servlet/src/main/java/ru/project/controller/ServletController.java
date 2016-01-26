@@ -19,7 +19,7 @@ public class ServletController {
     @Inject
     private BaseService service;
 
-    @RequestMapping(value = "/servlet",
+    @RequestMapping(//value = "/servlet",
             method = RequestMethod.POST,
             headers = {"content-type=application/xml"}
     )
