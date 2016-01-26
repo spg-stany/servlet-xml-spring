@@ -1,6 +1,8 @@
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import ru.project.controller.AppConfig;
@@ -25,6 +27,8 @@ public class Launcher {
     private static ServletContextHandler getServletHandler() throws IOException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(AppConfig.class);
+        //AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
 
         ServletHolder mvcServletHolder = new ServletHolder("mvcServlet", new DispatcherServlet(ctx));
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
