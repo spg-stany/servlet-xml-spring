@@ -6,10 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "request")
 public class Request {
 
-    public static final String REQUEST_TYPE = "request-type";
-    public static final String LOGIN = "login";
-    public static final String PASSWORD = "password";
-
+    //public static final String REQUEST_TYPE = "request-type";
+    //public static final String LOGIN = "login";
+    //public static final String PASSWORD = "password";
     //private RequestTypeEnum requestType;
     private String requestType;
     private String login;
@@ -24,15 +23,7 @@ public class Request {
     public void setRequestType(String requestType) {
         this.requestType = requestType;
     }
-    /*
-    public RequestTypeEnum getRequestType() {
-        return requestType;
-    }
 
-    public void setRequestType(RequestTypeEnum requestType) {
-        this.requestType = requestType;
-    }
-    */
     @XmlElement(name = "login", required = true)
     public String getLogin() {
         return login;
@@ -50,4 +41,14 @@ public class Request {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /*
+    public RequestTypeEnum getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(RequestTypeEnum requestType) {
+        this.requestType = requestType;
+    }
+    */
 }
