@@ -1,4 +1,4 @@
-package ru.project.transport;
+package ru.project.controller.transport;
 
 public enum ResultEnum {
     OK              (0, "все хорошо"),

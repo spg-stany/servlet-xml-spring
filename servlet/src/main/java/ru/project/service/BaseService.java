@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.project.model.Account;
 import ru.project.model.Agent;
-import ru.project.transport.ResultEnum;
+import ru.project.controller.transport.ResultEnum;
 import ru.project.utils.HashGen;
 import ru.project.utils.XmlUtils;
 

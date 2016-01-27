@@ -4,8 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import ru.project.transport.Request;
-import ru.project.transport.RequestTypeEnum;
+import ru.project.controller.transport.Request;
 
 @Deprecated
 public class XMLParser extends DefaultHandler {

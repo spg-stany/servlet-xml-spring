@@ -1,4 +1,4 @@
-package ru.project.transport;
+package ru.project.controller.transport;
 
 import org.apache.commons.lang3.StringUtils;
 

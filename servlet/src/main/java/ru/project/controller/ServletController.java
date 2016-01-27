@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.project.model.Agent;
 import ru.project.service.BaseService;
-import ru.project.transport.Request;
-import ru.project.transport.ResultEnum;
-import ru.project.utils.XmlUtils;
+import ru.project.controller.transport.Request;
+import ru.project.controller.transport.ResultEnum;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
