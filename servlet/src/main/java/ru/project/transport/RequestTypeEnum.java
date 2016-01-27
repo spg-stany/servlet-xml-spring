@@ -2,6 +2,7 @@ package ru.project.transport;
 
 import org.apache.commons.lang3.StringUtils;
 
+@Deprecated
 public enum RequestTypeEnum {
     NEW_AGENT("new-agt"),
     AGT_BALANCE("agt-bal");

@@ -7,6 +7,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import ru.project.transport.Request;
 import ru.project.transport.RequestTypeEnum;
 
+@Deprecated
 public class XMLParser extends DefaultHandler {
 
     private Request req = new Request();
@@ -32,6 +33,7 @@ public class XMLParser extends DefaultHandler {
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
+        /*
         if (thisElement.equals(Request.REQUEST_TYPE)) {
             String type = new String(ch, start, length);
             RequestTypeEnum requestEnum = RequestTypeEnum.fromString(type);
@@ -43,6 +45,7 @@ public class XMLParser extends DefaultHandler {
         if (thisElement.equals(Request.PASSWORD)) {
             req.setPassword(new String(ch, start, length));
         }
+        */
     }
 
 

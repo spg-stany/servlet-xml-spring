@@ -27,28 +27,39 @@ public class ServletController {
     )
     String handleRequestPost(@RequestBody String request) throws Exception {
         String result = "UNKNOWN RequestType";
+        try {
+            //Request req = XmlUtils.xmlToRequest(IOUtils.toInputStream(request, "UTF-8"));
 
-        Request req = XmlUtils.xmlToRequest(IOUtils.toInputStream(request, "UTF-8"));
-        /*
-        JAXBContext jaxbContext = JAXBContext.newInstance(Request.class);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        Request req = (Request) unmarshaller.unmarshal(IOUtils.toInputStream(request, "UTF-8"));
-        */
+            JAXBContext jaxbContext = JAXBContext.newInstance(Request.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            Request req = (Request) unmarshaller.unmarshal(IOUtils.toInputStream(request, "UTF-8"));
 
-        Agent agent = new Agent(req.getLogin(), req.getPassword());
+            Agent agent = new Agent(req.getLogin(), req.getPassword());
 
-        switch (req.getRequestType()) {
-            case NEW_AGENT: {
-                result = service.createAgent(agent);
-                break;
+            switch (req.getRequestType()) {
+                //NEW_AGENT
+                case "new-agt": {
+                    result = service.createAgent(agent);
+                    break;
+                }
+                //AGT_BALANCE
+                case "agt-bal": {
+                    result = service.getAgentBalance(agent);
+                    break;
+                }
+                default: {
+                    result = "UNKNOWN RequestType";
+                    break;
+                }
             }
-            case AGT_BALANCE: {
-                result = service.getAgentBalance(agent);
-                break;
-            }
+
+            //return result;
+        } catch (Exception e) {
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>Fail</response>";
         }
 
         return result;
+
     }
 
 }
