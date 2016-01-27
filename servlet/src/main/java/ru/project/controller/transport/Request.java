@@ -6,14 +6,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "request")
 public class Request {
 
-    //public static final String REQUEST_TYPE = "request-type";
-    //public static final String LOGIN = "login";
-    //public static final String PASSWORD = "password";
-    //private RequestTypeEnum requestType;
     private String requestType;
     private String login;
     private String password;
 
+    /*
+    public static final String REQUEST_TYPE = "request-type";
+    public static final String LOGIN = "login";
+    public static final String PASSWORD = "password";
+    //private RequestTypeEnum requestType;
+    */
 
     @XmlElement(name = "request-type", required = true)
     public String getRequestType() {

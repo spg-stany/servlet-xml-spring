@@ -54,7 +54,7 @@ public class ServletController {
             }
 
         } catch (Exception e) {
-            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>"+ ResultEnum.OTHER.getCode() +"</response>";
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>\n<result-code>"+ ResultEnum.OTHER.getCode() +"</result-code>\n</response>";
         }
 
         return result;
