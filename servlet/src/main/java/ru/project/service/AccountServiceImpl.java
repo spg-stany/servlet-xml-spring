@@ -3,7 +3,7 @@ package ru.project.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.project.service.dao.AccountDAO;
+import ru.project.dao.AccountDAO;
 import ru.project.model.Account;
 
 import javax.inject.Inject;
