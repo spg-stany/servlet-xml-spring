@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.project.model.Agent;
 import ru.project.service.BaseService;
 import ru.project.transport.Request;
+import ru.project.transport.ResultEnum;
 import ru.project.utils.XmlUtils;
 
 import javax.inject.Inject;
@@ -54,7 +55,7 @@ public class ServletController {
             }
 
         } catch (Exception e) {
-            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>Fail</response>";
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>"+ ResultEnum.OTHER.getCode() +"</response>";
         }
 
         return result;
