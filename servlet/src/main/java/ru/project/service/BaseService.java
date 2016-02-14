@@ -3,14 +3,14 @@ package ru.project.service;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.project.controller.transport.ResultEnum;
 import ru.project.model.Account;
 import ru.project.model.Agent;
-import ru.project.controller.transport.ResultEnum;
 import ru.project.utils.HashGen;
 import ru.project.utils.XmlUtils;
 
-import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +22,7 @@ public class BaseService {
     private final AgentService agentService;
     private final AccountService accountService;
 
-    @Inject
+    @Autowired
     public BaseService(AgentService agentService,
                        AccountService accountService) {
         this.agentService = agentService;

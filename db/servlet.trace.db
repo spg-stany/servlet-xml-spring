@@ -458,3 +458,51 @@ Caused by: org.h2.jdbc.JdbcSQLException: Неверное имя пользов�
 Wrong user name or password [28000-190]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
 	... 63 more
+02-15 02:40:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? AND password = ? [42102-174]
+02-15 02:40:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? AND password = ? [42102-174]
+02-15 02:40:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? AND password = ? [42102-174]
+02-15 02:40:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? [42102-174]
+02-15 02:40:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? [42102-174]
+02-15 02:40:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? [42102-174]
+02-15 02:42:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? AND password = ? [42102-174]
+02-15 02:42:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? [42102-174]
+02-15 02:42:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? AND password = ? [42102-174]
+02-15 02:42:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? [42102-174]
+02-15 02:42:27 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? AND password = ? [42102-174]
+02-15 02:42:27 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "AGENT" не найдена
+Table "AGENT" not found; SQL statement:
+SELECT id FROM agent WHERE phone = ? [42102-174]
