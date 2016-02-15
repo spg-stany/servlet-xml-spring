@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Client {
 
-    public static final String URL = "http://localhost:8080/servlet";
+    public static final String URL = "http://localhost:8080/servlet/xml";
 
     public static void main(String[] args)
     {

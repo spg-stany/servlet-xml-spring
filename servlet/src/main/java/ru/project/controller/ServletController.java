@@ -21,7 +21,7 @@ public class ServletController {
     @Autowired
     private BaseService service;
 
-    @RequestMapping(//value = "/servlet",
+    @RequestMapping(value = "/xml",
             method = RequestMethod.POST,
             headers = {"content-type=application/xml"}
     )
@@ -29,7 +29,6 @@ public class ServletController {
         String result = "UNKNOWN RequestType";
         try {
             //Request req = XmlUtils.xmlToRequest(IOUtils.toInputStream(request, "UTF-8"));
-
             JAXBContext jaxbContext = JAXBContext.newInstance(Request.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             Request req = (Request) unmarshaller.unmarshal(IOUtils.toInputStream(request, "UTF-8"));
@@ -54,6 +53,7 @@ public class ServletController {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>\n<result-code>"+ ResultEnum.OTHER.getCode() +"</result-code>\n</response>";
         }
 

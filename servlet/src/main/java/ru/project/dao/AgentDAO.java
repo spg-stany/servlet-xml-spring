@@ -1,32 +1,36 @@
 package ru.project.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Repository;
 import ru.project.model.Agent;
 import ru.project.utils.HashGen;
 
-import javax.inject.Inject;
-import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Repository
-public class AgentDAO extends JdbcDaoSupport {
-    //@Inject
+public class AgentDAO// extends JdbcDaoSupport
+{
+    @Autowired
+    protected JdbcOperations jdbcOperations;
+
+    /*
+    //@Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Inject
+    @Autowired
     public AgentDAO(DataSource dataSource) {
         setDataSource(dataSource);
-        jdbcTemplate = new JdbcTemplate(dataSource);
+        //jdbcTemplate = new JdbcTemplate(dataSource);
     }
+    */
 
     public int createAgent(Agent agent) throws SQLException {
+        return //getJdbcTemplate().update
+                jdbcOperations.update
+                ("INSERT INTO servlet.agent (phone, password) VALUES(?, ?)", agent.getPhone(), agent.getPassword());
+        /*
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(getJdbcTemplate());
         jdbcInsert.withTableName("agent").usingGeneratedKeyColumns("id");
 
@@ -35,13 +39,14 @@ public class AgentDAO extends JdbcDaoSupport {
         parameters.put("password", agent.getPassword());
 
         return jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters)).intValue();
-        //String sql = "INSERT INTO agent (phone, password) VALUES(?, ?)";
-        //return getJdbcTemplate().update(sql, agent.getPhone(), agent.getPassword());
+        */
     }
 
     public Integer getByLogin(Agent agent) throws SQLException {
         try {
-            return getJdbcTemplate().queryForObject("SELECT id FROM agent WHERE phone = ?",
+            return //getJdbcTemplate().queryForObject
+                    jdbcOperations.queryForObject
+                    ("SELECT id FROM servlet.agent WHERE phone = ?",
                     Integer.class,
                     agent.getPhone());
         } catch (EmptyResultDataAccessException e) {
@@ -51,7 +56,9 @@ public class AgentDAO extends JdbcDaoSupport {
 
     public Integer getByLoginAndPassword(Agent agent) throws SQLException {
         try {
-            return getJdbcTemplate().queryForObject("SELECT id FROM agent WHERE phone = ? AND password = ?",
+            return //getJdbcTemplate().queryForObject
+                    jdbcOperations.queryForObject
+                    ("SELECT id FROM servlet.agent WHERE phone = ? AND password = ?",
                     Integer.class,
                     agent.getPhone(),
                     HashGen.hash(agent.getPassword()));
