@@ -58,7 +58,6 @@ public class ServletController {
         }
 
         return result;
-
     }
 
 }

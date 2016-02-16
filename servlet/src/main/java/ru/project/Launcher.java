@@ -2,7 +2,6 @@ package ru.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
@@ -11,9 +10,11 @@ public class Launcher {
 
     public static void main(String[] args) throws Exception
     {
-        //ApplicationContext ctx = SpringApplication.run(new Class<?>[] {Launcher.class, AppConfig.class}, args);
-        ApplicationContext ctx = SpringApplication.run(Launcher.class, args);
+        SpringApplication.run(Launcher.class, args);
 
+
+
+        //ApplicationContext ctx = SpringApplication.run(new Class<?>[] {Launcher.class, AppConfig.class}, args);
 
         /*
         Server server = new Server(8080);

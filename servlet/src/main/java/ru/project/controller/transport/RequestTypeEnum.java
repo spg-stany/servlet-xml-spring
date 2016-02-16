@@ -2,7 +2,6 @@ package ru.project.controller.transport;
 
 import org.apache.commons.lang3.StringUtils;
 
-@Deprecated
 public enum RequestTypeEnum {
     NEW_AGENT("new-agt"),
     AGT_BALANCE("agt-bal");
@@ -12,7 +11,6 @@ public enum RequestTypeEnum {
     RequestTypeEnum(String type) {
         this.type = type;
     }
-
 
     public static RequestTypeEnum fromString(String text) {
         if (StringUtils.isBlank(text)) return null;

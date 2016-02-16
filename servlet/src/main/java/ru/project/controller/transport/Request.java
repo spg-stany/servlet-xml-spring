@@ -10,18 +10,13 @@ public class Request {
     private String login;
     private String password;
 
-    /*
-    public static final String REQUEST_TYPE = "request-type";
-    public static final String LOGIN = "login";
-    public static final String PASSWORD = "password";
-    //private RequestTypeEnum requestType;
-    */
+    private RequestTypeEnum reqType;
 
-    @XmlElement(name = "request-type", required = true)
     public String getRequestType() {
         return requestType;
     }
 
+    @XmlElement(name = "request-type", required = true)
     public void setRequestType(String requestType) {
         this.requestType = requestType;
     }
@@ -44,13 +39,12 @@ public class Request {
         this.password = password;
     }
 
-    /*
-    public RequestTypeEnum getRequestType() {
-        return requestType;
+    public RequestTypeEnum getReqType() {
+        return reqType;
     }
 
-    public void setRequestType(RequestTypeEnum requestType) {
-        this.requestType = requestType;
+    public void setReqType(RequestTypeEnum requestType) {
+        this.reqType = requestType;
     }
-    */
+
 }
