@@ -2,20 +2,13 @@ package ru.project.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
-import ru.project.controller.transport.Request;
-import ru.project.controller.transport.ResponseAccount;
-import ru.project.controller.transport.ResponseAgent;
-import ru.project.controller.transport.ResultEnum;
+import ru.project.transport.ResponseAccount;
+import ru.project.transport.ResponseAgent;
+import ru.project.transport.ResultEnum;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 

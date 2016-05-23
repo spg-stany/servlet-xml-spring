@@ -1,4 +1,4 @@
-package ru.project.controller.transport;
+package ru.project.transport;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

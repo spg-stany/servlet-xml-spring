@@ -1,4 +1,4 @@
-package ru.project.controller;
+package ru.project;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ru.project.controller.transport.Request;
-import ru.project.controller.transport.ResultEnum;
+import ru.project.transport.Request;
+import ru.project.transport.ResultEnum;
 import ru.project.model.Agent;
 import ru.project.service.BaseService;
 
