@@ -25,7 +25,7 @@ public class ServletController {
             method = RequestMethod.POST,
             headers = {"content-type=application/xml"}
     )
-    String handleRequestPost(@RequestBody String request) throws Exception {
+    String handleRequestPost(@RequestBody String request) {
         String result;
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Request.class);
@@ -51,7 +51,7 @@ public class ServletController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>\n<result-code>"+ ResultEnum.OTHER.getCode() +"</result-code>\n</response>";
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>\n<result-code>" + ResultEnum.OTHER.getCode() + "</result-code>\n</response>";
         }
 
         return result;
