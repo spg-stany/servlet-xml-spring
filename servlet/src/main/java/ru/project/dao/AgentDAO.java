@@ -10,58 +10,22 @@ import ru.project.utils.HashGen;
 import java.sql.SQLException;
 
 @Repository
-public class AgentDAO// extends JdbcDaoSupport
-{
+public class AgentDAO {
+
     @Autowired
     protected JdbcOperations jdbcOperations;
 
-    /*
-    //@Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    public AgentDAO(DataSource dataSource) {
-        setDataSource(dataSource);
-        //jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-    */
-
-    public int createAgent(Agent agent) throws SQLException {
-        return //getJdbcTemplate().update
-                jdbcOperations.update
+    public int createAgent(Agent agent) {
+        return jdbcOperations.update
                 ("INSERT INTO servlet.agent (phone, password) VALUES(?, ?)", agent.getPhone(), agent.getPassword());
-        /*
-        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(getJdbcTemplate());
-        jdbcInsert.withTableName("agent").usingGeneratedKeyColumns("id");
-
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("phone", agent.getPhone());
-        parameters.put("password", agent.getPassword());
-
-        return jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters)).intValue();
-        */
     }
 
-    public Integer getByLogin(Agent agent) throws SQLException {
+    public Integer getByLogin(Agent agent) {
         try {
-            return //getJdbcTemplate().queryForObject
-                    jdbcOperations.queryForObject
+            return jdbcOperations.queryForObject
                     ("SELECT id FROM servlet.agent WHERE phone = ?",
-                    Integer.class,
-                    agent.getPhone());
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-    }
-
-    public Integer getByLoginAndPassword(Agent agent) throws SQLException {
-        try {
-            return //getJdbcTemplate().queryForObject
-                    jdbcOperations.queryForObject
-                    ("SELECT id FROM servlet.agent WHERE phone = ? AND password = ?",
-                    Integer.class,
-                    agent.getPhone(),
-                    HashGen.hash(agent.getPassword()));
+                            Integer.class,
+                            agent.getPhone());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }

@@ -2,7 +2,6 @@ package ru.project.model;
 
 import javax.persistence.*;
 
-@Entity
 public class Agent {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

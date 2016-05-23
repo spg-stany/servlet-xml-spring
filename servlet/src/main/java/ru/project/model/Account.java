@@ -1,10 +1,8 @@
 package ru.project.model;
 
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

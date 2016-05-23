@@ -23,15 +23,6 @@ public class XmlUtils {
 
     private final static Logger logger = LoggerFactory.getLogger(XmlUtils.class);
 
-    public static Request xmlToRequest(InputStream is) throws ParserConfigurationException, SAXException, IOException {
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        SAXParser parser = factory.newSAXParser();
-        XMLParser requestParser = new XMLParser();
-        parser.parse(is, requestParser);
-        return requestParser.getReq();
-    }
-
-
     public static String responseAgentToXml(ResultEnum result) {
         ResponseAgent response = new ResponseAgent();
         response.setResultCode(result.getCode());

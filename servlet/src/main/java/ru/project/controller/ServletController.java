@@ -26,13 +26,11 @@ public class ServletController {
             headers = {"content-type=application/xml"}
     )
     String handleRequestPost(@RequestBody String request) throws Exception {
-        String result = "UNKNOWN RequestType";
+        String result;
         try {
-            //Request req = XmlUtils.xmlToRequest(IOUtils.toInputStream(request, "UTF-8"));
             JAXBContext jaxbContext = JAXBContext.newInstance(Request.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             Request req = (Request) unmarshaller.unmarshal(IOUtils.toInputStream(request, "UTF-8"));
-
             Agent agent = new Agent(req.getLogin(), req.getPassword());
 
             switch (req.getRequestType()) {
@@ -47,8 +45,7 @@ public class ServletController {
                     break;
                 }
                 default: {
-                    result = "UNKNOWN RequestType";
-                    break;
+                    throw new Exception("UNKNOWN RequestType");
                 }
             }
 

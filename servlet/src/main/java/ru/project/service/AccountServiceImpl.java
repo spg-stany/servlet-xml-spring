@@ -14,27 +14,13 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountDAO dao;
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = SQLException.class)
     public int createAccount(Account account) {
-        try {
-            return dao.createAccount(account);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
+        return dao.createAccount(account);
     }
 
     @Override
     public Account findByAgentId(int id) {
-        try {
-            return dao.findAccount(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return dao.findAccount(id);
     }
 
-    public void setDao(AccountDAO dao) {
-        this.dao = dao;
-    }
 }

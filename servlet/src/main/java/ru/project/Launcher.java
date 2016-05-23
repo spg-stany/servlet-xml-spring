@@ -11,11 +11,6 @@ public class Launcher {
     public static void main(String[] args) throws Exception
     {
         SpringApplication.run(Launcher.class, args);
-
-
-
-        //ApplicationContext ctx = SpringApplication.run(new Class<?>[] {Launcher.class, AppConfig.class}, args);
-
         /*
         Server server = new Server(8080);
 
@@ -35,6 +30,6 @@ public class Launcher {
 
         org.h2.tools.Server webServer = org.h2.tools.Server.createWebServer("-webAllowOthers","-webPort","8082").start();
         System.out.println("H2 WebServer started and connection is open");
-        System.out.println("URL:" + webServer.getURL());
+        System.out.println("URL: " + webServer.getURL());
     }
 }

@@ -36,7 +36,6 @@ public class AppConfig {
     @Value("${jdbc.password}")
     private String password;
 
-
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -48,58 +47,10 @@ public class AppConfig {
         return dataSource;
     }
 
-/*
-    @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Environment env) {
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("ru.project");
-
-        Properties jpaProperties = new Properties();
-        //jpaProperties.put(org.hibernate.cfg.Environment.DIALECT, dialect);
-        //jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, hbm2ddlAuto);
-        //jpaProperties.put(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY,"org.hibernate.cfg.ImprovedNamingStrategy");
-        //jpaProperties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL,false);
-        //jpaProperties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL,true);
-        entityManagerFactoryBean.setJpaProperties(jpaProperties);
-
-        return entityManagerFactoryBean;
-    }
-    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory);
-        return transactionManager;
-    }
-*/
-
     @Bean
     public DataSourceTransactionManager transactionManager(){
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
         transactionManager.setDataSource(dataSource());
         return transactionManager;
     }
-
-    /*
-    @Bean
-    public SpringLiquibase liquibase() {
-        SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setDataSource(dataSource());
-        liquibase.setChangeLog("file:config/liquibase.xml");
-
-        return liquibase;
-    }
-    */
-    /*
-    @Bean
-    public DataSource dataSource() throws NamingException {
-        JndiTemplate jndiTemplate = new JndiTemplate();
-        DataSource dataSource = (DataSource) jndiTemplate.lookup("jdbc/ds");
-
-        return dataSource;
-    }
-    */
-
-
 }

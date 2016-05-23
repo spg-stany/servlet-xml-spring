@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.project.controller.transport.ResultEnum;
 import ru.project.model.Account;
 import ru.project.model.Agent;
@@ -30,6 +31,7 @@ public class BaseService {
     }
 
 
+    @Transactional
     public String createAgent(Agent agent) {
         String validateResult = validate(agent);
         if (StringUtils.isNotEmpty(validateResult))
@@ -39,7 +41,7 @@ public class BaseService {
         if (agentService.createAgent(agent) == 0)
             return XmlUtils.responseAgentToXml(ResultEnum.OTHER);
 
-        Integer agentId = agentService.findIdByLoginAndPassword(agent);
+        Integer agentId = agentService.findIdByLogin(agent);
         if (agentId == null)
             return XmlUtils.responseAccountToXml(ResultEnum.AGENT_NOT_EXITS);
 
@@ -49,8 +51,9 @@ public class BaseService {
         return XmlUtils.responseAgentToXml(ResultEnum.OK);
     }
 
+
     public String getAgentBalance(Agent agent) {
-        Integer id = agentService.findIdByLoginAndPassword(agent);
+        Integer id = agentService.findIdByLogin(agent);
         if (id == null)
             return XmlUtils.responseAccountToXml(ResultEnum.AGENT_NOT_EXITS);
 
