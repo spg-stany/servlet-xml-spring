@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "request")
-public class Request {
+public class XMLRequest {
 
     private String requestType;
     private String login;

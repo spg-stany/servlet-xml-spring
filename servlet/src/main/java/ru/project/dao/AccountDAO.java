@@ -3,9 +3,11 @@ package ru.project.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import ru.project.model.Account;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
@@ -24,7 +26,12 @@ public class AccountDAO {
             return jdbcOperations.queryForObject
                     ("SELECT * FROM servlet.account WHERE agent_id = ?",
                             new Object[]{agentId},
-                            (rs, rowNum) -> new Account(rs.getInt("agent_id"), rs.getBigDecimal("balance"))
+                            new RowMapper<Account>() {
+                                @Override
+                                public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+                                    return new Account(rs.getInt("agent_id"), rs.getBigDecimal("balance"));
+                                }
+                            }
 
                     );
         } catch (EmptyResultDataAccessException e) {

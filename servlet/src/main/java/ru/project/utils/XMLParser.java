@@ -4,16 +4,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import ru.project.transport.Request;
+import ru.project.transport.XMLRequest;
 
 @Deprecated
 public class XMLParser extends DefaultHandler {
 
-    private Request req = new Request();
+    private XMLRequest req = new XMLRequest();
     private String thisElement = StringUtils.EMPTY;
 
 
-    public Request getReq() {
+    public XMLRequest getReq() {
         return req;
     }
 
@@ -33,15 +33,15 @@ public class XMLParser extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         /*
-        if (thisElement.equals(Request.REQUEST_TYPE)) {
+        if (thisElement.equals(XMLRequest.REQUEST_TYPE)) {
             String type = new String(ch, start, length);
             RequestTypeEnum requestEnum = RequestTypeEnum.fromString(type);
             req.setRequestType(requestEnum);
         }
-        if (thisElement.equals(Request.LOGIN)) {
+        if (thisElement.equals(XMLRequest.LOGIN)) {
             req.setLogin(new String(ch, start, length));
         }
-        if (thisElement.equals(Request.PASSWORD)) {
+        if (thisElement.equals(XMLRequest.PASSWORD)) {
             req.setPassword(new String(ch, start, length));
         }
         */
