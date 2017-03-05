@@ -6,11 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.project.transport.ResultEnum;
+import ru.project.xml.ResultEnum;
 import ru.project.model.Account;
 import ru.project.model.Agent;
 import ru.project.utils.HashGen;
-import ru.project.utils.XmlUtils;
+import ru.project.xml.XMLResponse;
 
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
@@ -32,48 +32,67 @@ public class BaseService {
 
 
     @Transactional
-    public String createAgent(Agent agent) {
-        String validateResult = validate(agent);
-        if (StringUtils.isNotEmpty(validateResult))
-            return validateResult;
+    public XMLResponse createAgent(Agent agent) {
+        XMLResponse response = new XMLResponse();
+
+        ResultEnum validateResult = validate(agent);
+        if (validateResult != null) {
+            response.setResultCode(validateResult.getCode());
+            return response;
+        }
 
         agent.setPassword(HashGen.hash(agent.getPassword()));
-        if (agentService.createAgent(agent) == 0)
-            return XmlUtils.responseAgentToXml(ResultEnum.OTHER);
+        if (agentService.createAgent(agent) == 0) {
+            response.setResultCode(ResultEnum.OTHER.getCode());
+            return response;
+        }
 
         Integer agentId = agentService.findIdByLogin(agent);
-        if (agentId == null)
-            return XmlUtils.responseAccountToXml(ResultEnum.AGENT_NOT_EXITS);
+        if (agentId == null) {
+            response.setResultCode(ResultEnum.AGENT_NOT_EXITS.getCode());
+            return response;
+        }
 
-        if (accountService.createAccount(new Account(agentId, new BigDecimal(0))) == 0)
-            return XmlUtils.responseAgentToXml(ResultEnum.OTHER);
+        if (accountService.createAccount(new Account(agentId, new BigDecimal(0))) == 0) {
+            response.setResultCode(ResultEnum.OTHER.getCode());
+            return response;
+        }
 
-        return XmlUtils.responseAgentToXml(ResultEnum.OK);
+        response.setResultCode(ResultEnum.OK.getCode());
+        return response;
     }
 
 
-    public String getAgentBalance(Agent agent) {
+    public XMLResponse getAgentBalance(Agent agent) {
+        XMLResponse response = new XMLResponse();
+
         Integer id = agentService.findIdByLogin(agent);
-        if (id == null)
-            return XmlUtils.responseAccountToXml(ResultEnum.AGENT_NOT_EXITS);
+        if (id == null) {
+            response.setResultCode(ResultEnum.AGENT_NOT_EXITS.getCode());
+            return response;
+        }
 
         Account account = accountService.findByAgentId(id);
-        if (account == null)
-            return XmlUtils.responseAccountToXml(ResultEnum.ACCOUNT_NOT_EXITS);
+        if (account == null) {
+            response.setResultCode(ResultEnum.ACCOUNT_NOT_EXITS.getCode());
+            return response;
+        }
 
-        return XmlUtils.responseAccountToXml(ResultEnum.OK, account.getBalance());
+        response.setResultCode(ResultEnum.OK.getCode());
+        response.setBalance(account.getBalance());
+        return response;
     }
 
 
-    protected String validate(Agent agent) {
+    protected ResultEnum validate(Agent agent) {
         if (isExistAgent(agent))
-            return XmlUtils.responseAgentToXml(ResultEnum.DUPLICATE_AGENT);
+            return ResultEnum.DUPLICATE_AGENT;
         else if (!isValidPhone(agent.getPhone()))
-            return XmlUtils.responseAgentToXml(ResultEnum.WRONG_LOGIN);
+            return ResultEnum.WRONG_LOGIN;
         else if (isBadPassword(agent.getPassword()))
-            return XmlUtils.responseAgentToXml(ResultEnum.BAD_PASSWORD);
+            return ResultEnum.BAD_PASSWORD;
 
-        return StringUtils.EMPTY;
+        return null;
     }
 
 
